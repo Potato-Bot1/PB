@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potato Site</title>
+    <style>
+        body {
+            background-color: #D2B48C; /* Cor de batata clara */
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-x: hidden; /* Evita rolagem horizontal */
+        }
+        header {
+            background-color: #8B4513; /* Cor de batata escura */
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000; /* Garante que o cabeçalho fique sobre outros conteúdos */
+        }
+        h1 {
+            color: #fff;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .menu-button {
+            background-color: #fff;
+            color: #8B4513;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            border: 1px solid #8B4513;
+            border-radius: 5px;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .dropdown-content button {
+            margin: 5px 0;
+        }
+        main {
+            text-align: center;
+            margin-top: 100px; /* Ajuste para não sobrepor o cabeçalho */
+            padding: 20px;
+        }
+        .potato-large {
+            font-size: 5em;
+            margin: 20px 0;
+        }
+        .highlight {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #8B4513; /* Cor de batata escura */
+        }
+        .section {
+            margin-top: 50px;
+        }
+        .section-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #8B4513; /* Cor de batata escura */
+            margin-bottom: 20px;
+        }
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            width: 100%;
+            margin: 20px auto; /* Centraliza o carrossel */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-images img {
+            width: 600px; /* Define uma largura fixa para todas as imagens */
+            height: 400px; /* Define uma altura fixa para todas as imagens */
+            object-fit: cover; /* Garante que a imagem se ajuste ao tamanho definido */
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .carousel-button.prev {
+            left: 10px;
+        }
+        .carousel-button.next {
+            right: 10px;
+        }
+        .signature {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.8em;
+            color: #8B4513;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao Potato Site</h1>
+        <button class="menu-button" onclick="toggleDropdown()">Menu</button>
+        <div id="dropdown" class="dropdown-content">
+            <button class="menu-button" onclick="addBot()">Me adicione</button>
+            <button class="menu-button" onclick="scrollToCommands()">Comandos</button>
+        </div>
+    </header>
+    <main>
+        <div class="potato-large">🥔</div>
+        <div class="highlight">Potato Bot</div>
+        <p>Este é o site oficial do Potato Bot. Aqui você encontrará todas as informações e comandos para usar no Potato.</p>
+
+        <!-- Carrossel de Imagens -->
+        <div class="carousel">
+            <div class="carousel-images">
+                <img src="https://media.discordapp.net/attachments/1261818403304378560/1266144674176040970/Screenshot_20240725-182433_1.jpg?ex=66a4149e&is=66a2c31e&hm=9fb6c45f71ae73a82a69eeeca8f59f0b45eaa806e940ef50353dbba422e1d196&=&format=webp&width=493&height=417" alt="Imagem 1 P.help">
+                <img src="https://media.discordapp.net/attachments/1261818403304378560/1266144674419314718/Screenshot_20240725-182443_1.jpg?ex=66a4149e&is=66a2c31e&hm=ea4706b3555a81b5f541f5ff9566e96431aaa5c165e8a0d41f7c134089da7cc3&=&format=webp&width=455&height=417" alt="Imagem 2 Diversão">
+                <img src="https://media.discordapp.net/attachments/1261818403304378560/1266144674800734208/Screenshot_20240725-182447_1.jpg?ex=66a4149e&is=66a2c31e&hm=fa677716f6979d8ab861624812211ff3b9827db502fe35319d00a5b979ae859e&=&format=webp&width=542&height=417" alt="Imagem 3 Status">
+            </div>
+            <button class="carousel-button prev" onclick="moveSlide(-1)">❮</button>
+            <button class="carousel-button next" onclick="moveSlide(1)">❯</button>
+        </div>
+
+        <div class="section" id="history">
+            <h2 class="section-title">Sobre</h2>
+            <p>Oi! Eu sou o Potato Bot, seu novo amigo no Discord. Estou aqui para trazer </p>
+<p> diversão e organização ao seu servidor com alguns comandos incríveis:</p>
+        </div>
+        <div class="section" id="commands">
+            <h2 class="section-title">Comandos</h2>
+            <p>Aqui estão os comandos disponíveis para o Potato Bot:</p>
+            <ul>
+                <li>🏓 P.ping - 📋 P.help </li>
+                <li>🎲 P.dado - ❓ P.pergunta </li>
+                <li>🚮 P.clear - 👄 P.say </li>
+                <li>🏦 P.atm - 🔨 P.work </li>
+                <li>(Sempre criando novos comandos para lhe entreter)</li>
+                <!-- Adicione mais comandos conforme necessário -->
+            </ul>
+        </div>
+    </main>
+
+    <div class="signature">
+        Desenvolvido por Miguel Alexsander B.F. | © 2024
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        
+        function showSlides(n) {
+            const slides = document.querySelectorAll('.carousel-images img');
+            if (n >= slides.length) { slideIndex = 0; }
+            if (n < 0) { slideIndex = slides.length - 1; }
+            for (let slide of slides) {
+                slide.style.display = "none";
+            }
+            slides[slideIndex].style.display = "block";
+        }
+        
+        function moveSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdown");
+            if (dropdown.style.display === "flex") {
+                dropdown.style.display = "none";
+            } else {
+                dropdown.style.display = "flex";
+            }
+        }
+
+        function addBot() {
+            window.open('https://discord.com/oauth2/authorize?client_id=1207463225017237575&scope=bot&permissions=8', '_blank');
+        }
+
+        function scrollToCommands() {
+            document.getElementById("commands").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Inicializar o carrossel
+        showSlides(slideIndex);
+    </script>
+</body>
+</html>
